@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "node": "^19.8.1"
+  },
+  "name": "examination_sandahl_sara",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sarasandahl/examination_sandahl_sara.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sarasandahl/examination_sandahl_sara/issues"
+  },
+  "homepage": "https://github.com/sarasandahl/examination_sandahl_sara#readme"
+}
