@@ -2,6 +2,7 @@ const express = require('express');
 const apiMobiles = require('../client/mobiles');
 const apiComputers = require('../client/computers');
 const apiAudio = require('../client/audioDevices');
+const apiTelevisions = require('../client/televisions');
 
 const app = express();
 
@@ -173,6 +174,62 @@ app.delete('/mobiles/:id', async (req, res) => {
     const response = await apiMobiles.deleteMobile(id)
     res.sendStatus(200)
 })
+
+////////
+//Mot Televisions
+///////
+
+//hämta tv
+app.get('/televisions', async (req, res) => {
+    const response = await apiTelevisions.getTelevisions()
+    const televisions = response.data    
+    res.send(televisions)
+})
+
+//hämta en tv på id
+app.get('/televisions/:id', async (req, res) => {
+    const id = parseInt(req.params.id)
+    // get tv from api
+    const response = await apiTelevisions.getTelevision(id)
+    const televisions = response.data
+    res.send(televisions)
+})
+
+//skapa tv
+app.post('/televisions', async (req, res) => {
+    const newTelevision = {
+        manufacturer: req.body.manufacturer,
+        screen_size: req.body.screen_size,
+        name: req.body.name,
+        description: req.body.description,
+        price: req.body.price,
+    }
+    const response = await apiTelevisions.postTelevision(newTelevision)
+    res.sendStatus(201)
+})
+
+//ändra tv
+app.put('/televisions/:id', async (req, res) => {
+    const id = parseInt(req.params.id)
+    const newTelevision = {
+        manufacturer: req.body.manufacturer,
+        screen_size: req.body.screen_size,
+        name: req.body.name,
+        description: req.body.description,
+        price: req.body.price,
+    }
+    const response = await apiTelevisions.putTelevision(id, newTelevision)
+    res.sendStatus(201)
+})
+
+//ta bort tv
+app.delete('/televisions/:id', async (req, res) => {
+    const id = parseInt(req.params.id)
+
+    const response = await apiTelevisions.deleteTelevision(id)
+    res.sendStatus(200)
+})
+
 
 //kör port
 app.listen(8008, () => {
