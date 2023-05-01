@@ -1,12 +1,68 @@
 const express = require('express');
 const apiMobiles = require('../client/mobiles');
 const apiComputers = require('../client/computers');
+const apiAudio = require('../client/audioDevices');
 
 const app = express();
 
 app.use(express.json());
 
 // rest api elektonik
+
+////////
+//Mot audio-devices
+///////
+
+//hämta device
+app.get('/audio-devices', async (req, res) => {
+    const response = await apiAudio.getAudios()
+    const audioDevices = response.data    
+    res.send(audioDevices)
+})
+
+//hämta en device på id
+app.get('/audio-devices/:id', async (req, res) => {
+    const id = parseInt(req.params.id)
+    // get audio from api
+    const response = await apiAudio.getAudio(id)
+    const audioDevice = response.data
+    res.send(audioDevice)
+})
+
+//skapa device
+app.post('/audio-devices', async (req, res) => {
+    const newAudioDevice = {
+        manufacturer: req.body.manufacturer,
+        efficiency: req.body.efficiency,
+        name: req.body.name,
+        description: req.body.description,
+        price: req.body.price,
+    }
+    const response = await apiAudio.postAudio(newAudioDevice)
+    res.sendStatus(201)
+})
+
+//ändra device
+app.put('/audio-devices/:id', async (req, res) => {
+    const id = parseInt(req.params.id)
+    const newAudioDevice = {
+        manufacturer: req.body.manufacturer,
+        efficiency: req.body.efficiency,
+        name: req.body.name,
+        description: req.body.description,
+        price: req.body.price,
+    }
+    const response = await apiAudio.putAudio(id, newAudioDevice)
+    res.sendStatus(201)
+})
+
+//ta bort device
+app.delete('/audio-devices/:id', async (req, res) => {
+    const id = parseInt(req.params.id)
+
+    const response = await apiAudio.deleteAudio(id)
+    res.sendStatus(200)
+})
 
 ////////
 //Mot computers
