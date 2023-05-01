@@ -34,6 +34,20 @@ app.post('/mobiles', async (req, res) => {
     res.sendStatus(201)
 })
 
+//ändra mobil
+app.put('/mobiles/:id', async (req, res) => {
+    const id = parseInt(req.params.id)
+    const newMobile = {
+        manufacturer: req.body.manufacturer,
+        screen_type: req.body.screen_type,
+        name: req.body.name,
+        description: req.body.description,
+        price: req.body.price,
+    }
+    const response = await api.putMobile(id, newMobile)
+    res.sendStatus(201)
+})
+
 //delete
 app.delete('/mobiles/:id', async (req, res) => {
     const id = parseInt(req.params.id)
@@ -42,6 +56,7 @@ app.delete('/mobiles/:id', async (req, res) => {
     res.sendStatus(200)
 })
 
+//kör port
 app.listen(8008, () => {
     console.log("http://localhost:8008/");
 })

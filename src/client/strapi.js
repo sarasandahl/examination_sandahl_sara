@@ -35,9 +35,28 @@ const postMobile = async(mobile) => {
       });
 };
 
+//ändra mobil
+const putMobile = async(id, mobile) => {
+    return await axios().put(`/mobiles/${id}`, {
+        "data": {
+            "manufacturer": mobile.manufacturer,
+            "screen_type": mobile.screen_type,
+            "name": mobile.name,
+            "description": mobile.description,
+            "price": mobile.price,
+        }
+      })
+      .then(function (response) {
+          console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error.response);
+      });
+};
+
 // ta bort på id
 const deleteMobile = async (id) => {
     return await axios().delete(`/mobiles/${id}`)
 };
 
-module.exports = { deleteMobile, getMobiles, getMobile, postMobile };
+module.exports = { getMobiles, getMobile, postMobile, putMobile, deleteMobile };
