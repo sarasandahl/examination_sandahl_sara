@@ -6,12 +6,12 @@ const axios = () => {
     })
 };
 
-//hämtar alla enheter från api:et
+//hämtar alla enheter 
 const getMobiles = async () => {
     return await axios().get('/mobiles')
 };
 
-//hämtar en enhet genom id från api:et
+//hämtar en enhet genom id
 const getMobile = async (id) => {
     return await axios().get(`/mobiles/${id}`)
 };

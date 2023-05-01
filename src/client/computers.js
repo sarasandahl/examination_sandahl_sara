@@ -6,12 +6,12 @@ const axios = () => {
     })
 };
 
-//hämtar alla enheter från api:et
+//hämtar alla enheter 
 const getComputers= async () => {
     return await axios().get('/computers')
 };
 
-//hämtar en enhet genom id från api:et
+//hämtar en enhet genom id
 const getComputer = async (id) => {
     return await axios().get(`/computers/${id}`)
 };
@@ -35,7 +35,7 @@ const postComputer = async(computer) => {
       });
 };
 
-//ändra mobil
+//ändra dator
 const putComputer = async(id, computer) => {
     return await axios().put(`/computers/${id}`, {
         "data": {

@@ -4,24 +4,23 @@ const apiComputers = require('../client/computers');
 const apiAudio = require('../client/audioDevices');
 const apiTelevisions = require('../client/televisions');
 
+//sätt upp express
 const app = express();
 
 app.use(express.json());
-
-// rest api elektonik
 
 ////////
 //Mot audio-devices
 ///////
 
-//hämta device
+//hämta ljudenhet
 app.get('/audio-devices', async (req, res) => {
     const response = await apiAudio.getAudios()
     const audioDevices = response.data    
     res.send(audioDevices)
 })
 
-//hämta en device på id
+//hämta en ljudenhet på id
 app.get('/audio-devices/:id', async (req, res) => {
     const id = parseInt(req.params.id)
     // get audio from api
@@ -30,7 +29,7 @@ app.get('/audio-devices/:id', async (req, res) => {
     res.send(audioDevice)
 })
 
-//skapa device
+//skapa ljudenhet
 app.post('/audio-devices', async (req, res) => {
     const newAudioDevice = {
         manufacturer: req.body.manufacturer,
@@ -43,7 +42,7 @@ app.post('/audio-devices', async (req, res) => {
     res.sendStatus(201)
 })
 
-//ändra device
+//ändra ljudenhet
 app.put('/audio-devices/:id', async (req, res) => {
     const id = parseInt(req.params.id)
     const newAudioDevice = {
@@ -57,7 +56,7 @@ app.put('/audio-devices/:id', async (req, res) => {
     res.sendStatus(201)
 })
 
-//ta bort device
+//ta bort ljudenhet
 app.delete('/audio-devices/:id', async (req, res) => {
     const id = parseInt(req.params.id)
 
@@ -69,7 +68,7 @@ app.delete('/audio-devices/:id', async (req, res) => {
 //Mot computers
 ///////
 
-//hämta dator
+//hämta alla datorer
 app.get('/computers', async (req, res) => {
     const response = await apiComputers.getComputers()
     const computer = response.data    
@@ -179,7 +178,7 @@ app.delete('/mobiles/:id', async (req, res) => {
 //Mot Televisions
 ///////
 
-//hämta tv
+//hämta alla tv
 app.get('/televisions', async (req, res) => {
     const response = await apiTelevisions.getTelevisions()
     const televisions = response.data    
@@ -235,16 +234,5 @@ app.delete('/televisions/:id', async (req, res) => {
 app.listen(8008, () => {
     console.log("http://localhost:8008/");
 })
-
-// async function main() {
-//     const mobiles = await api.getMobiles()
-//     const mobile = await api.getMobile(2)
-//     console.log(mobiles.data)
-//     console.log('------------------------------------------------')
-//     console.log('------------------------------------------------')
-//     console.log(mobile.data)
-// };
-
-// main()
 
 

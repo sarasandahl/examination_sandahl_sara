@@ -6,12 +6,12 @@ const axios = () => {
     })
 };
 
-//hämtar alla enheter från api:et
+//hämtar alla enheter 
 const getAudios = async () => {
     return await axios().get('/audio-devices')
 };
 
-//hämtar en enhet genom id från api:et
+//hämtar en enhet 
 const getAudio = async (id) => {
     return await axios().get(`/audio-devices/${id}`)
 };

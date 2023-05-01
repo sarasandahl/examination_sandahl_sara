@@ -6,12 +6,12 @@ const axios = () => {
     })
 };
 
-//hämtar alla enheter från api:et
+//hämtar alla enheter
 const getTelevisions = async () => {
     return await axios().get('/televisions')
 };
 
-//hämtar en enhet genom id från api:et
+//hämtar en enhet genom id 
 const getTelevision = async (id) => {
     return await axios().get(`/televisions/${id}`)
 };
