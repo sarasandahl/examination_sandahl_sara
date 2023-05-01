@@ -1,34 +1,45 @@
 const express = require('express');
-const api = require('../client/api');
+const api = require('../client/strapi');
 const app = express();
 
 app.use(express.json());
 
 // rest api
-
-app.get('/mobiles', (req, res) => {
-    const response = api.getMobiles()
-    const mobiles = response.data
-    console.log(mobiles)
+//hämta mobiler
+app.get('/mobiles', async (req, res) => {
+    const response = await api.getMobiles()
+    const mobiles = response.data    
     res.send(mobiles)
 })
 
-// vi kan gå igenom detta senare, men ett exempel på hur vi kan skicka in en ny mobil och posta den med axios genom postman
-app.post('/mobiles', (req, res) => {
-    console.log(req.body)
+//hämta en mobil på id
+app.get('/mobiles/:id', async (req, res) => {
+    const id = parseInt(req.params.id)
+    // get mobile from api
+    const response = await api.getMobile(id)
+    const mobile = response.data
+    res.send(mobile)
+})
 
+//skapa mobil
+app.post('/mobiles', async (req, res) => {
     const newMobile = {
         manufacturer: req.body.manufacturer,
         screen_type: req.body.screen_type,
         name: req.body.name,
         description: req.body.description,
-        price: parseInt(req.body.price),
+        price: req.body.price,
     }
+    const response = await api.postMobile(newMobile)
+    res.sendStatus(201)
+})
 
-    console.log(newMobile)
+//delete
+app.delete('/mobiles/:id', async (req, res) => {
+    const id = parseInt(req.params.id)
 
-    // const post = await api.postMobile(newMobile)
-    // console.log(post.data)
+    const response = await api.deleteMobile(id)
+    res.sendStatus(200)
 })
 
 app.listen(8008, () => {
